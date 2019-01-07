@@ -1,0 +1,217 @@
+Name: Robert(Jhih-Yong) Yang 
+Assignment: Proj2 Gerp
+
+The purpose of the program:
+
+Gerp, the final project I chose to do should index 
+all the files within a directory,
+allow users to input their queries as strings, 
+either case-sensitive or case-insensitive,
+and finally execute search queries on the strings passed in. 
+The user has to specify a directory that he or she 
+wants to index the files and do the query search. 
+Otherwise, the program reports an error and urges 
+the user to put in a valid directory. 
+The program is interactive, so it asks the user for 
+a query until the users inputs one. 
+If the query is a simple string, 
+the program search for the string without modifying 
+whether the letters are capitalized. 
+The program allows the user to use @i and @insensitive 
+to indicate that he or she wants to do a case-insensitive search.  
+When the serach is case-insensitive, 
+the program needs to look for words that 
+contain the same letters as the query 
+even if the capitalization differs on both. 
+The program also needs to let the user to indicate that 
+she or he wants to quit with @q, @quit,
+or simply just the commmand, ctrl-D. 
+The program continues when the query is not 
+found but updates the status to the user.
+
+Acknowledgements for any help you received, including references to 
+outside sources you consulted:
+
+I talked to Prof. Strange about how I should use data structure to 
+improve the performance of my program when we walked from Halligan to SEC.
+I also talked to TAs to learn more about valgrind 
+and read the article at 
+https://stackoverflow.com/questions/4035769/invalid-read-of-size-8-valgrind-c 
+to learn about a certain valgrind error message. 
+I visited 
+https://stackoverflow.com/questions/8317508/hash-function-for-a-string 
+to learn the hash function for strings. 
+I visited 
+https://stackoverflow.com/questions/3827926/what-does-stringnpos-mean 
+to learn what npos means.
+I visited https://github.com/tdlib/td/issues/37
+to solve undefined reference errors. 
+I visited 
+https://stackoverflow.com/questions/236129/
+the-most-elegant-way-to-iterate-the-words-of-a-string 
+to learn how to elegantly sort a line into words. 
+I visited http://www.cplusplus.com/reference/algorithm/transform/ 
+to learn to use the algorithm library to 
+convert lines and words to lower case. 
+
+The files that you provided and a short description 
+of what each file is and its purpose:
+
+Makefile
+Makefile allows the user to compile files with a simple command.
+
+README 
+README includes information about the purpose of Gerp, 
+acknowledgements for any help you received, 
+including references to outside sources you consulted,
+the files provided and a short description 
+of what each file is and its purpose, 
+an outline of the data structures and algorithms that you used, 
+and details and an explanation of how you tested 
+the various parts of your classes and the program as a whole
+
+DirNode.h
+The header file of the DirNode class which lets me see the 
+function prototypes clearly and fast, 
+so I can understand the class better in general. 
+
+DirNode.cpp
+DirNode.cpp is part of the starter code. 
+Its allows me to use properites of the directory to 
+see if there are files or sub-directories.
+
+FSTree.h
+The header file of the FSTrees class. 
+It shows the prototype of the functions 
+so that users can find the functions faster.
+
+FSTree.cpp
+FSTree.cpp is part of the starter code. 
+It shows details of functions that 
+allow me to loop thorugh the directories.
+
+LinkedList.h
+The header of the linkedlist class 
+contains attributes of the head pointer,
+the length of the linkedlist, and the current position pointer. 
+It allows me to take a quick look at my functions to decide 
+which one I need to use or which function I need to add.
+
+LinkedList.cpp
+The cpp file of the linkedlist class 
+has details of functions in the linkedlist class.
+I added a function to get the first 
+element of the linkedlist to ensure 
+no line is inserted twice and a function to 
+print the linkedlist in a reversed order, 
+so lines are printed in the right order.
+
+Index.h
+The header file of the index class has an attribute of the hashtable of 
+an static array of the size, 50000. It shows the function prototypes, 
+so I can more easily find what function I want to use. It includes 
+linkedlist and FSTree which includes DirNode because indexing 
+the words requires going thorugh the directories and using 
+the linkedlists of the hashtable.
+
+Index.cpp
+The cpp file of the index class includes details of the functions
+where I can ensure the function does what I intend to do. 
+The constructor of the index class calls a function to index 
+the words, which is the first part of the program.
+
+main.cpp
+The cpp file of main runs the program. 
+It call the indexing function and recursively asks the user 
+for quereis to perform searches.
+
+An outline of the data structures and algorithms that you used:
+
+I used a while true loop to keep taking in the queries from the user 
+until the user wants to quit. I used a FSTree of elements of DirNodes.
+The FSTree allows me to loop through the directories with the root as 
+the uppermost directory. DirNode allows me to have access to the properties 
+of the current directory, such as whether the directory has a sub-directory 
+or files and which directory is the parent directory of the current 
+directory. I used a hashtable of a static array to store linkedlists 
+of strings that have certains words in them. I talked to Prof. Strange 
+about using a static or dynamic array, and the conclusion was that 
+both would work in this case because there are only a ceratin amount 
+of words in the directories and files. I set the size to be 50000 
+because an array of the size, 100000, would take up a lot more 
+memory perform the same, if not worse. I used the standard library 
+hash function for strings to hash the words. Before inserting the 
+sentences that include the word into the array of linkedlist, 
+I divide the number that the hash function returns by 50000 and 
+took the remainder to decide the index where I should get the 
+linkedlist to insert the lines. Several words have the same index 
+after the number returned by the hash function was dividing by 
+50000 and taken the remainder. Thus, in the print function in the 
+linkedlist class, I had to verify that the lines in the linkedlist 
+actullay contain the word before printing out the line. The printing
+order was originally reversed because a linkedlist inserts elements
+to the beginning of the list, and the printing order is from the 
+starting element near the head to the last element in the list. 
+In order to print the right order, I used the reversed function 
+that was in lab 2 to reverse the order of the linkedlist of lines
+as strings. To print out lines in an order that lines inserted 
+first are printed first, I think the data structure, queue, 
+will be the most rational and efficient option. However, 
+I did not write the class, queue, in any assignments. 
+I would like to use a data structure class I wrote. 
+Additionally, the wall-clock run time does not differ a lot 
+between a linkedlist class that requires reversal function and a queue class.
+
+Details and an explanation of how you tested the various 
+parts of your classes and the program as a whole:
+
+To process the string, I chose to take the indices of the 
+first valid character and of the last valid chracter. The 
+word between the indices are the valid query. After writing 
+a basic string processing function, I printed out the starting 
+and ending indices to manually check if they match the right 
+indices. To test how to loop through the directories, I first 
+printed out all the files and sub-directories. I noticed the 
+order was wrong, so I drew a list of the order of printing 
+the files and directories on a piece and paper. Then, I 
+implemented a recursive function based on the order I drew on paper. 
+To test if my approach to the program works, I originally 
+did not use any data structure just to keep the program neat 
+and easily understandable. I first loop through all the files 
+and directories in the order that I drew on the paper and print 
+out each line I found that includes that query word. I comapre 
+the expected output and notice that I need to add case-insensitive 
+cases. So I seach up how to convert words and lines to lower case 
+online and used a simple online c++ compiler to test if the function 
+works. Then, I added a bool to keep track whether the query 
+is found in any line. I printed out cerr statements along the 
+functions that pass the bool to check if the bool is passed correctly. 
+After the original implemention without data structures, the program works 
+in 9 minutes for the large directory. However, the valgrind does not 
+run fast enough. Therefore, I decided to test adding hashtable as a main 
+data structure to improve the performance. I tested the right size of the 
+hashtable by declaring the array in different size and compile to see if 
+there is any error. Then, the hashtable that does not use too much memory 
+is still too small to make the program works becuase there are too many lines. 
+Then, I tried to use linkedlist to chain the lines of words that are hash to 
+the same value. The output did not match. So I look into the expeceted 
+output and discovered that my program which originally worked without 
+data structure still includes all the expected lines but includes some 
+unnecessary lines as well. To solve the issue, I tested the program by 
+writing a simpler program which index the lines and prints a single 
+linkedlist. I noticed that the linkedlist included lines that does not 
+contain the query. So, I used the c++ online complier to test the hash 
+function for the words that are in the same linkedlist. They have same 
+values after being taken the remainder and dividing by 100000. In the 
+linkedlist class, I modified the print function with the addtional lines 
+that ensure the lines that are printed out include the query word. 
+Testing the ouput file again, I noticed the order of lines were reversed, 
+and there were some double lines. So, I tested adding functions that 
+returns the first element. I tested by outputing the the first element 
+to see if it returns the right line. Then, I ran lab2 again to test the 
+reverese linkedlist function, and after knowing it works, I implemented 
+it in the linkedlist class to perform a reversed-order printing function. 
+The output files match at the point, and there was no memory leaks, but 
+valgrind errors. I tested to solve the errors by chaning the size of the 
+hashtable, and I found that at the size of 50000, the performance is good 
+when the array does not take too much memory.
