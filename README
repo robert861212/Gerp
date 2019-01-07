@@ -1,5 +1,5 @@
-Name: Robert(Jhih-Yong) Yang 
-Assignment: Proj2 Gerp
+Not for Improvement: I used a static hashtable with linkedlists to solve collisions. I chose not to use standard libraries and only the past code I wrote in Data Structure. The program perfromed well for given inputs and met all the specs. However, after taking Algorithms, I am aware that I could have improved space complexity by using a dynamic hashtable and runtime by solving collisions with open addressing and double hashing.
+
 
 The purpose of the program:
 
